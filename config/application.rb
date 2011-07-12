@@ -42,20 +42,32 @@ module Dupa
 end
 
 
-Cell::Rails::View.class_eval do
- def self.include(*params, &block)
-  super
-  puts Rails.logger.error( caller.join("\n") )
- end
+#Cell::Rails::View.class_eval do
+# def self.include(*params, &block)
+#  super
+#  puts Rails.logger.error( "INCLUDE: " + caller.join("\n") )
+# end
+#
+# def self.extend(*params, &block)
+#  super
+#  puts Rails.logger.error( "EXTEND: " + caller.join("\n") )
+# end
+#
+#
+#  def extend(*params, &block)
+#    super
+#    puts Rails.logger.error( "OBJ INCLUDE: " + caller.join("\n") )
+#  end
+#end
 
- def self.extend(*params, &block)
-  super
-  puts Rails.logger.error( caller.join("\n") )
- end
 
-
-  def extend(*params, &block)
-    super
-    puts Rails.logger.error( caller.join("\n") )
+Cell::VersionStrategy::ClassMethods.module_eval do
+  def view_context_class
+    @view_context_class ||= begin
+      klass = Class.new(Cell::Rails::View)
+      klass.send(:include, _helpers)
+      klass.send(:include, _routes.url_helpers)
+      klass
+    end
   end
 end
