@@ -1,4 +1,23 @@
+
+XXXX
+
+<%= debug(caller) %>
+
+object_id : <%= object_id %> <br/>
+
+Cell::Base._helpers : <%= Cell::Base._helpers %> </br>
+BaseWidget._helpers : <%= BaseWidget._helpers %> <br/>
+TwitterWidget._helpers : <%= TwitterWidget._helpers %> <br/>
+self.class.helpers : <%= self.class.helpers.inspect %> <br/>
+self.helpers : <%= self.helpers %> <br/>
+
+<%= self.class.inspect %> <br/>
+<%= self.class.ancestors.inspect %> <br/>
+
 <%= widget_div do %>
+
+  <%= debug(caller) %>
+
   <h1>
     TwitterWidget#display
   </h1>
@@ -7,3 +26,7 @@
     Find me in app/widgets/twitter/display.html.erb
   </p>
 <% end %>
+
+<%= self.inspect %>
+
+<%#= require 'ruby-debug'; debugger %>

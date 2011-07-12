@@ -1,4 +1,4 @@
-class SomethingsController < ApplicationController  
+class SomethingsController < ApplicationController
 
   #helper do
   #  def widget_div(options={}, &block)

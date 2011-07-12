@@ -40,3 +40,22 @@ module Dupa
     config.filter_parameters += [:password]
   end
 end
+
+
+Cell::Rails::View.class_eval do
+ def self.include(*params, &block)
+  super
+  puts Rails.logger.error( caller.join("\n") )
+ end
+
+ def self.extend(*params, &block)
+  super
+  puts Rails.logger.error( caller.join("\n") )
+ end
+
+
+  def extend(*params, &block)
+    super
+    puts Rails.logger.error( caller.join("\n") )
+  end
+end
